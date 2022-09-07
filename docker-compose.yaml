@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password --secure-file-priv="" --local-infile=1
+    environment:
+      MYSQL_ROOT_PASSWORD: pwd
+      MYSQL_DATABASE: teams
+    ports:
+    - 3306:3306
+    volumes:
+    - ./mysql-data:/docker-entrypoint-initdb.d
+    - ./src/mysql-files:/data-files
+
+  app:
+    build: ./src/app
+    ports:
+      - 5001:80  # host:container
+    command: sh -c "sleep 40s ; python3 app.py"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: pwd
+      MYSQL_DB: teams
+    volumes:
+    - ./src/app:/app
+    depends_on:
+    - mysql
+
+  host_site:
+    image: php:apache
+    volumes:
+    - ./src/site:/var/www/html
+    ports:
+    - 5000:80
+    depends_on:
+    - app
+
+volumes:
+  mysql-data:
