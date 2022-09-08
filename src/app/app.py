@@ -1,4 +1,5 @@
 # Imports required resources
+from xml.etree.ElementTree import tostring
 import mysql.connector
 import csv
 from flask import Flask
@@ -27,11 +28,14 @@ class Example(Resource):
 
 class Test(Resource):
     def get(self):
-        cursor.execute('Select * FROM pokemon WHERE IsFullyEvolved = "0" \n ORDER BY RAND() \n LIMIT 6;')
+        return []
+
+    def get(self, teamsize):
+        cursor.execute('Select * FROM pokemon WHERE IsFullyEvolved = "0" \n ORDER BY RAND() \n LIMIT ' + teamsize + ';')
         poke = cursor.fetchall()
         pokelist = []
         for pokelement in poke:
-            tempoke = {
+            pokestats = {
                 'PokeID': pokelement[0],
                 'Name': pokelement[1],
                 'Type1': pokelement[2],
@@ -39,13 +43,13 @@ class Test(Resource):
                 'IsFullyEvolved': pokelement[4],
                 'IsLegendary': pokelement[5]
             }
-            pokelist.append(tempoke)
+            pokelist.append(pokestats)
         return {
             'Pokemon': pokelist
         }
 
 api.add_resource(Example, '/')
-api.add_resource(Test, '/test_me')
+api.add_resource(Test, '/teamgen/<teamsize>')
 
 if __name__ == "__main__":
     app.run(debug=True, port=80, host='0.0.0.0')

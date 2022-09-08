@@ -11,14 +11,19 @@
 
     <body>
         <h1> Randomized List </h1>
+        <form method="post">
+            <label for="teamsize"> Size of team to generate: </label>
+            <input type="number" id="teamsize" name="teamsize" min="1" max="6"/>
+            <input type="submit" name="randteam" value="Generate Random Team"/>
+        </form>
+
         <div class="pokeholder">
         <?php
             if(isset($_POST['randteam'])) {
-                $json = file_get_contents('http://app/test_me');
+                $json = file_get_contents('http://app/teamgen/' . $_POST['teamsize']);
                 $obj = json_decode($json);
                     $pokeds = $obj->Pokemon;
 
-                # Nested divs are an issue to fix later
                 foreach ($pokeds as $pokedict) {
                     $o = "<div class=pokemon ";
                     $id = "";
@@ -37,12 +42,5 @@
             }
         ?>
         </div>
-        
-        <label for="teamsize"> Size of team to generate: </label>
-        <input type="number" id="teamsize" name="teamsize" min="1" max="6"/>
-        <form method="post">
-            <input type="submit" name="randteam" value="Generate Random Team"/>
-        </form>
-
     </body>
 </html>
