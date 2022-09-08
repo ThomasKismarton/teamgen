@@ -38,6 +38,8 @@
         ?>
         </div>
         
+        <label for="teamsize"> Size of team to generate: </label>
+        <input type="number" id="teamsize" name="teamsize" min="1" max="6"/>
         <form method="post">
             <input type="submit" name="randteam" value="Generate Random Team"/>
         </form>
