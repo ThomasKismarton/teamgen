@@ -1,4 +1,4 @@
-#Hello!
+# Welcome!
 
 This is a small personal project that I've been using to hone my full stack development skills.
 In particular, I wanted to further my understanding of Docker Compose, how containers interact, and simple application building.
