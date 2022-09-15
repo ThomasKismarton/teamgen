@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Dummy Site</title>
+        <title>Teamgen V.1</title>
         <link rel="stylesheet" href="style.php" media="screen">
         <?php 
             function get_sprite($val) {
@@ -28,40 +28,47 @@
     </head>
 
     <body>
-        <h1> Randomized List </h1>
-        <form method="post">
-            <label for="teamsize"> Size of team to generate: </label>
-            <input type="number" id="teamsize" name="teamsize" min="1" max="6"/>
-            <input type="text" id="primary" name="primary">
-            <input type="submit" name="randteam" value="Generate Random Team"/>
-        </form>
+        <div class="fontWrapper">
+            <h1> Generate a Team! </h1>
+            <form method="post" class="labelForm">
+                <div>
+                    <label for="teamsize"> Size of team to generate: </label>
+                    <input type="number" id="teamsize" class="stackedLabel" name="teamsize" min="1" max="6"/>
+                </div>
+                <div>
+                    <label for="primary"> Primary typing of Pokemon: </label>
+                    <input type="text" id="primary" class="stackedLabel" name="primary">
+                </div>
+                <input type="submit" name="randteam" value="Generate Random Team"/>
+            </form>
 
-        <div class="pokeholder">
-        <?php
-            if(isset($_POST['randteam'])) {
-                $teamsize = size_of_team($_POST['teamsize']);
-                $primary = get_primary_type($_POST['primary']);
-                $json = file_get_contents('http://app/teamgen/' . $teamsize . '/' . $primary);
-                $obj = json_decode($json);
-                    $pokeds = $obj->Pokemon;
+            <div class="pokeholder">
+            <?php
+                if(isset($_POST['randteam'])) {
+                    $teamsize = size_of_team($_POST['teamsize']);
+                    $primary = get_primary_type($_POST['primary']);
+                    $json = file_get_contents('http://app/teamgen/' . $teamsize . '/' . $primary);
+                    $obj = json_decode($json);
+                        $pokeds = $obj->Pokemon;
 
-                foreach ($pokeds as $pokedict) {
-                    $o = "<div class=pokemon ";
-                    $id = "";
-                    foreach ($pokedict as $k => $v) {
-                        $o .= "$k=$v ";
-                        if ($k == "Name") {
-                            $name = $v;
+                    foreach ($pokeds as $pokedict) {
+                        $o = "<div class=pokemon ";
+                        $id = "";
+                        foreach ($pokedict as $k => $v) {
+                            $o .= "$k=$v ";
+                            if ($k == "Name") {
+                                $name = $v;
+                            }
+                            if ($k == "PokeID") {
+                                $img = get_sprite($v);
+                            }
                         }
-                        if ($k == "PokeID") {
-                            $img = get_sprite($v);
-                        }
+                        $o .= '>' . '<div class="nameplate">' . $name . '</div>' . $img . '</div>';
+                        echo($o);
                     }
-                    $o .= '>' . '<div>' . $name . '</div>' . $img . '</div>';
-                    echo($o);
                 }
-            }
-        ?>
+            ?>
+            </div>
         </div>
     </body>
 </html>

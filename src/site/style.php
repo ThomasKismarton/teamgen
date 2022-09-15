@@ -1,7 +1,5 @@
 <?php
 header("Content-type: text/css");
-
-$border = '1px solid';
 ?>
 :root {
   --bug: #bdc45b;
@@ -24,7 +22,32 @@ $border = '1px solid';
   --water:	#3578f4;
 }
 
+.fontWrapper {
+  font-family: sans-serif; 
+}
+
+.nameplate {
+  margin: 2px;
+  padding: 4px;
+  border: solid;
+  border-radius: 10px;
+  background-color: white;
+  text-align: center;
+  width: 30%
+}
+
+.labelForm {
+  border: solid;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.stackedLabel {
+  margin: 5px;
+}
+
 .img {
+  margin-top: 50px;
   width: fit-content;
 }
 
@@ -37,21 +60,17 @@ $border = '1px solid';
 
 .pokemon {
   width: 30%;
-  height: 20%;
+  height: auto;
   padding: 10px;
   margin: 5px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   border-width: thick;
   border: solid;
   border-radius: 10px;
-}
-
-.pokemon.img {
-
 }
 
 div[type1=Bug] {
