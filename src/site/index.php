@@ -15,7 +15,7 @@
                 return 6;
             }
 
-            function get_primary_type($val) { # Allows for invalid input - should prompt user/disallow
+            function get_type($val) { # Allows for invalid input - should prompt user/disallow
                 $val = strtolower($val);
                 $types = array('water', 'ice', 'grass', 'fire', 'electric', 'dark', 'fairy', 'steel', 'ground', 'flying', 'fighting', 'psychic',
                 'ghost', 'rock', 'normal', 'poison', 'bug', 'dragon');
@@ -39,6 +39,10 @@
                     <label for="primary"> Primary typing of Pokemon: </label>
                     <input type="text" id="primary" class="stackedLabel" name="primary">
                 </div>
+                <div>
+                    <label for="secondary"> Secondary typing of Pokemon: </label>
+                    <input type="text" id="secondary" class="stackedLabel" name="secondary">
+                </div>
                 <input type="submit" name="randteam" value="Generate Random Team"/>
             </form>
 
@@ -46,8 +50,9 @@
             <?php
                 if(isset($_POST['randteam'])) {
                     $teamsize = size_of_team($_POST['teamsize']);
-                    $primary = get_primary_type($_POST['primary']);
-                    $json = file_get_contents('http://app/teamgen/' . $teamsize . '/' . $primary);
+                    $primary = get_type($_POST['primary']);
+                    $secondary = get_type($_POST['secondary']);
+                    $json = file_get_contents('http://app/teamgen/' . $teamsize . '/' . $primary . '/' . $secondary);
                     $obj = json_decode($json);
                         $pokeds = $obj->Pokemon;
 
