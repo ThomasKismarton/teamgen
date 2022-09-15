@@ -29,18 +29,18 @@
 
     <body>
         <div class="fontWrapper">
-            <h1> Generate a Team! </h1>
+            <h1 class="nameplate"> Generate a Team! </h1>
             <form method="post" class="labelForm">
                 <div>
-                    <label for="teamsize"> Size of team to generate: </label>
+                    <label for="teamsize" class="nameplate"> Size of team to generate: </label>
                     <input type="number" id="teamsize" class="stackedLabel" name="teamsize" min="1" max="6"/>
                 </div>
                 <div>
-                    <label for="primary"> Primary typing of Pokemon: </label>
+                    <label for="primary" class="nameplate"> Primary typing of Pokemon: </label>
                     <input type="text" id="primary" class="stackedLabel" name="primary">
                 </div>
                 <div>
-                    <label for="secondary"> Secondary typing of Pokemon: </label>
+                    <label for="secondary" class="nameplate"> Secondary typing of Pokemon: </label>
                     <input type="text" id="secondary" class="stackedLabel" name="secondary">
                 </div>
                 <input type="submit" name="randteam" value="Generate Random Team"/>

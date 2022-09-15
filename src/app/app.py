@@ -29,7 +29,7 @@ def typeGet(primary, secondary):
         elif (secondary == "random"):
             return "WHERE Type1 = \'" + primary + "\'"
         else:
-            return "WHERE Type2 IN (\'" + primary + "\'," + "\'" + secondary + "\')" + " OR Type1 = \'" + primary + "\' "
+            return "WHERE Type1 IN (\'" + primary + "\'," + "\'" + secondary + "\')" + " OR Type2 IN (\'" + primary + "\'," + "\'" + secondary + "\')"
 
 
 class Example(Resource):

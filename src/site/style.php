@@ -22,18 +22,22 @@ header("Content-type: text/css");
   --water:	#3578f4;
 }
 
+body {
+  background-color: #1F363D;
+}
+
 .fontWrapper {
   font-family: sans-serif; 
 }
 
 .nameplate {
-  margin: 2px;
+  margin-bottom: 5px;
   padding: 4px;
   border: solid;
   border-radius: 10px;
   background-color: white;
   text-align: center;
-  width: 30%
+  width: 20%
 }
 
 .labelForm {
@@ -61,6 +65,7 @@ header("Content-type: text/css");
 .pokemon {
   width: 30%;
   height: auto;
+  max-height: 40%;
   padding: 10px;
   margin: 5px;
   display: flex;
